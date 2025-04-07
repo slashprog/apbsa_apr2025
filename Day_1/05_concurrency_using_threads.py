@@ -1,3 +1,5 @@
+# from gevent import monkey; monkey.patch_all()
+
 from threading import Thread
 from time import sleep
 
