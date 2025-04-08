@@ -15,7 +15,7 @@ if __name__ == '__main__':
     def hello_world():
         print("Hello world....")
 
-    print_thread = RunPeriodic(15, print_test)
+    print_thread = RunPeriodic(5, print_test)
     print_thread.start()
     # Execute print_test() function every 5 seconds
 
@@ -24,7 +24,7 @@ if __name__ == '__main__':
     # Execute hello_thread() function every 2 seconds
 
     from time import sleep
-    for i in range(5):
+    for i in range(20):
         print("main thread: counting", i)
         sleep(1)
 
