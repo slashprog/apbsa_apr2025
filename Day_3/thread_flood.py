@@ -1,4 +1,4 @@
-from gevent import monkey; monkey.patch_all()
+# Do NOT run this code on Windows!
 from threading import Thread
 import itertools
 
