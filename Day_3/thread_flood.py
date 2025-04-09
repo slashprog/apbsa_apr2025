@@ -1,4 +1,6 @@
 # Do NOT run this code on Windows!
+from gevent import monkey; monkey.patch_all()
+
 from threading import Thread
 import itertools
 

@@ -1,6 +1,8 @@
+from gevent import monkey; monkey.patch_all()
+
 from multiprocessing import current_process
 from threading import current_thread
-from concurrent.futures import ProcessPoolExecutor as Executor
+from concurrent.futures import ThreadPoolExecutor as Executor
 from time import sleep
 
 def testfn():
