@@ -10,6 +10,6 @@ def testfn():
 def testfn2(v):
     t = current()
     print(f"testfn2 is run as {t.name}")
-    sleep(5)
+    sleep(30)
     print(f"testfn2[{t.name}] complete")
     return v*v
