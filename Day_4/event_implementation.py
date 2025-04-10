@@ -6,14 +6,17 @@ class Event:
         self.lock = Lock()
 
     def set(self):
-        with self.lock:
-            self.status = True
+        self.status = True
         
     def is_set(self):
-        with self.lock:
-            return self.status
+        return self.status
 
     def clear(self):
         with self.lock:
             self.status = False
+
+    def wait(self):
+        pass # Actual implemention: block if status is False, until 
+             # the status becomes True (by some other thread)
+             
             
