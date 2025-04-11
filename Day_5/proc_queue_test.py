@@ -1,17 +1,17 @@
 from multiprocessing import Process, Queue
 from time import sleep
 
-q = Queue(10)
+
 
 def testfn1(q):
-    q.put("Hello, world")
-    sleep(1)
+    #q.put("Hello, world")
+    #sleep(1)
     q.put(100)
     sleep(1)
-    q.put([44, 55, 66, 77])
-    sleep(1)
-    q.put({"name": "John Doe", "score": 97})
-    sleep(1)
+    #q.put([44, 55, 66, 77])
+    #sleep(1)
+    #q.put({"name": "John Doe", "score": 97})
+    #sleep(1)
 
 
 def testfn2(q):
@@ -21,8 +21,8 @@ def testfn2(q):
         print("-" * 30)
 
 
-
 if __name__ == '__main__':
+    q = Queue(10)
     p1 = Process(target=testfn1, args=(q,))
     p2 = Process(target=testfn2, args=(q,))
 
