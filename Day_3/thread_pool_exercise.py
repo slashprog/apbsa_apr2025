@@ -8,7 +8,7 @@ Implement the ThreadPool class such that the code within
 the '__main__' namespace works.
 
 """
-from thread_pool_new import ThreadPool
+from thread_pool import ThreadPool
 from threading import current_thread as current
 
 if __name__ == '__main__':

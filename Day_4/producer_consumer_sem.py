@@ -13,7 +13,8 @@ class SimpleQueue:
 
     def __str__(self):
         with self.lock:
-            return str(self.queue)
+             s = f"SimpleQueue({list(self.queue)})"
+        return s
 
 
     def put(self, v):

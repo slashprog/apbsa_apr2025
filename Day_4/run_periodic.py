@@ -1,4 +1,4 @@
-from threading import Thread
+from threading import Thread, Event
 
 class RunPeriodic(Thread):
     def __init__(self, interval, fn, *fn_args, **fn_kwargs):
@@ -7,14 +7,12 @@ class RunPeriodic(Thread):
         self.fn = fn
         self.fn_args = fn_args
         self.fn_kwargs = fn_kwargs
-        self.cancel = False
+        self.cancel = Event()
 
     def run(self):
-        from time import sleep
-        while not self.cancel:
-            sleep(self.interval)
+        while not self.cancel.wait(self.interval):
             self.fn(*self.fn_args, **self.fn_kwargs)
 
     def stop(self):
-        self.cancel = True
+        self.cancel.set()
                     

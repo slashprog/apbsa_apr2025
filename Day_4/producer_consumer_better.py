@@ -17,7 +17,7 @@ def producer():
 
 def consumer():
     while True:
-        v = queue.get(block=False)
+        v = queue.get(timeout=10)
         print("Consumed: {}".format(v))
         sleep((v/100.0) + 13)
 

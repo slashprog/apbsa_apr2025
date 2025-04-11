@@ -8,16 +8,16 @@ data = deque()
 def producer():
     while True:
         v = randint(10, 99)
-        print(f"producer: adding {v}")
         data.append(v)
+        print(f"producer: adding {v}, {data=}")
         sleep(random())
 
 
 def consumer():
     while True:
+        sleep(random() / 2)
         v = data.popleft()
-        print(f"consumer: fetched {v}")
-        sleep(random())
+        print(f"consumer: fetched {v}, {data=}")
 
 
 if __name__ == '__main__':
