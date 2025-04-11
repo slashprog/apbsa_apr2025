@@ -9,29 +9,29 @@ stats = {
 
 from time import sleep
 
-def handle_client(stats):
+def handle_client(c, u):
     from random import random, randint
     from time import sleep
 
-    stats["connections"].value += 1
+    c.value += 1
 
     while True:
         sleep(randint(1, 10))
-        stats["usage_count"].value += 1
+        u.value += 1
  
 
-def show_stats(stats):
+def show_stats(c, u):
     from time import sleep
     while True:
         sleep(5)
-        print(f"Usage: {stats['usage_count'].value}, Connections: {stats['connections'].value}")
+        print(f"Usage: {u.value}, Connections: {c.value}")
 
 
 
 if __name__ == '__main__':
 
-    Process(target=show_stats, args=(stats,)).start()
+    Process(target=show_stats, args=(stats["connections"], stats["usage_count"])).start()
 
     with Executor(max_workers=6) as workers:
         for i in range(6):
-            workers.submit(handle_client, stats)
+            workers.submit(handle_client, stats["connections"], stats["usage_count"])
