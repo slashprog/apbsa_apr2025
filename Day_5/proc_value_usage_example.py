@@ -30,7 +30,7 @@ def show_stats(stats):
 
 if __name__ == '__main__':
 
-    Process(target=show_stats).start()
+    Process(target=show_stats, args=(stats,)).start()
 
     with Executor(max_workers=6) as workers:
         for i in range(6):
