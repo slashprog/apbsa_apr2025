@@ -8,7 +8,7 @@ stats = {
 
 from time import sleep
 
-def handle_client(stats):
+def handle_client():
     from random import random, randint
     from time import sleep
 
@@ -19,7 +19,7 @@ def handle_client(stats):
         sleep(randint(1, 10))
         stats["usage_count"].value += 1 
 
-def show_stats(stats):
+def show_stats():
     from time import sleep
     while True:
         sleep(5)
@@ -27,15 +27,10 @@ def show_stats(stats):
 
 if __name__ == '__main__':
 
-    Process(target=show_stats, args=(stats,)).start()
-    workers = []
+    Process(target=show_stats).start()
 
-    #with Executor(max_workers=6) as workers:
-    for i in range(6):
-        w = Process(target=handle_client, args=(stats,))
-        w.start()
-        workers.append(w)
-
-    for w in workers:
-        w.join()
-    
+    with Executor(max_workers=6) as workers:
+        for i in range(6):
+            workers.submit(handle_client)
+  
+  

@@ -15,6 +15,8 @@ def bar(d, l):
     p = current_process()
     sleep(0.5)
     print(f"In bar[{p.name}]: {dict(d)=}, {list(l)=}")
+    d["name"] = d["name"].upper()
+    l[0] *= 10
 
 if __name__ == '__main__':
     manager = Manager()

@@ -1,9 +1,9 @@
 from multiprocessing import Process, Array, Event
 from array import array
 
-arr = Array('i', range(10, 20))
+#arr = Array('i', range(10, 20))
 
-#arr = array('i', range(10, 20))
+arr = array('i', range(10, 20))
 
 squared = Event()
 halved = Event()

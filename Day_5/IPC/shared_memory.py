@@ -5,12 +5,12 @@ from time import sleep
 
 def testfn1(a):
     a *= 2
-    print(f"In testfn1[{current().name}]: a = {a}")
+    print(f"In testfn1[{current().name}]: a = {a}, {type(a)=}")
 
 def testfn2(a):
     sleep(1)
     a **= 2
-    print(f"In testfn2[{current().name}]: a = {a}")
+    print(f"In testfn2[{current().name}]: a = {a}, {type(a)=}")
 
 if __name__ == '__main__':
     num_template = np.array([2, 3, 4, 5, 6])
