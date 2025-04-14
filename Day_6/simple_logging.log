@@ -1,0 +1,16 @@
+ERROR:root:This is an error message
+2025-04-14 11:01:07,887: simple_logging_example.py: DEBUG: 48758: 
+2025-04-14 11:01:07,887: simple_logging_example.py: WARNING: 48758: 
+2025-04-14 11:01:07,887: simple_logging_example.py: ERROR: 48758: 
+2025-04-14 11:01:41,391: simple_logging_example.py: DEBUG: 48833: this is debug message
+2025-04-14 11:01:41,391: simple_logging_example.py: WARNING: 48833: This is a warning message
+2025-04-14 11:01:41,391: simple_logging_example.py: ERROR: 48833: This is an error message
+2025-04-14 11:02:42,967: root: DEBUG: 48954: this is debug message
+2025-04-14 11:02:42,967: root: WARNING: 48954: This is a warning message
+2025-04-14 11:02:42,967: root: ERROR: 48954: This is an error message
+2025-04-14 11:03:45,788: __main__: DEBUG: 49068: this is debug message
+2025-04-14 11:03:45,788: __main__: WARNING: 49068: This is a warning message
+2025-04-14 11:03:45,788: __main__: ERROR: 49068: This is an error message
+2025-04-14 11:27:02,304: __main__: DEBUG: 50498: this is debug message
+2025-04-14 11:27:02,305: __main__: WARNING: 50498: This is a warning message
+2025-04-14 11:27:02,305: __main__: ERROR: 50498: This is an error message
