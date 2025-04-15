@@ -7,7 +7,7 @@ from pydantic import BaseModel
 class User(BaseModel):
     name: str
     role: str
-    dept: str
+    score: float
 
 api = FastAPI()
 
@@ -15,7 +15,12 @@ api = FastAPI()
 async def hello_world():
     return {"hello": "world"}
 
-@api.post("/user")
+@api.post("/users")
 async def store_data(u: User):
     print("Storing ", u)
-    return JSONResponse(status_code=HTTP_201_CREATED)
+    return JSONResponse(content={"status" :"created"}, status_code=HTTP_201_CREATED)
+
+@api.get("/users")
+async def get_users():
+    # TODO
+    return [{"name": "John", "role": "Admin"}]
