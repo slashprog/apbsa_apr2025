@@ -75,28 +75,29 @@ class FileServer:
                 self.log.debug(f"{current().name}: Got message from {self.addrinfo}: {line}")
 
                 command, *args = line.split()
+                method = f"command_{command}"
 
-                if hasattr(self, command):
-                    cmd = getattr(self, command)
+                if hasattr(self, method):
+                    cmd = getattr(self, method)
                     cmd(*args)
                 else:
                     print("400 INVALID_COMMAND", file=self.outs, flush=True)
 
             self.log.debug(f"{current().name}: exiting run() loop")
 
-    def get(self, filename):
+    def command_get(self, filename):
         self.log.info(f"{current().name}:{self.addrinfo}: get request for file {filename}")
         print("200 OK", file=self.outs, flush=True)
 
-    def put(self, filename):
+    def command_put(self, filename):
         self.log.info(f"{current().name}:{self.addrinfo}: put request for file {filename}")
         print("201 CREATED", file=self.outs, flush=True)
 
-    def list(self):
+    def command_list(self):
         self.log.info(f"{current().name}:{self.addrinfo}: listing files")
         print("220 LISTING", file=self.outs, flush=True)
 
-    def exit(self):
+    def command_exit(self):
         self.log.info(f"{current().name}:{self.addrinfo}: closing connection")
         print("330 BYE", file=self.outs, flush=True)
         self.quit = True
