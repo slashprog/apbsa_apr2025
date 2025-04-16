@@ -1,0 +1,98 @@
+from redis import Redis
+from rq import Queue
+get_ipython().run_line_magic('cat', '')
+get_ipython().run_line_magic('ls', '')
+get_ipython().run_line_magic('cat', 'run_simple_tasks.py')
+get_ipython().run_line_magic('pip', 'install rq')
+from rq import Queue
+Queue
+#[Out]# <class 'rq.queue.Queue'>
+get_ipython().run_line_magic('ls', '')
+from simple_tasks import *
+add
+#[Out]# <function add at 0x7fe267eb69d0>
+add_slow
+#[Out]# <function add_slow at 0x7fe267eb6310>
+add_slow_busy
+#[Out]# <function add_slow_busy at 0x7fe267eb6dc0>
+add(10, 20)
+#[Out]# 30
+from rq import Queue
+from redis import Redis
+from simple_tasks import *
+q = Queue(connection=Redis(host="192.168.1.5"))
+q
+#[Out]# Queue('default')
+r = q.enqueue(add, 10, 20)
+r
+#[Out]# Job('2acb6522-3e5e-4576-a4e1-fd0033af0f54', enqueued_at=datetime.datetime(2021, 9, 14, 9, 35, 3, 508173))
+r.result
+#[Out]# 30
+r.result_ttle
+r.result_ttl
+r.result
+#[Out]# 30
+r.get_status()
+#[Out]# 'finished'
+r = q.enqueue(add_slow, 11, 20)
+r = q.enqueue(add_slow, 11, 20)
+r = q.enqueue(add_slow, 11, 20)
+r = q.enqueue(add_slow, 11, 20)
+r = q.enqueue(add_slow, 11, 20)
+r
+#[Out]# Job('3c172696-a493-4f22-a4f7-f585c506828f', enqueued_at=datetime.datetime(2021, 9, 14, 9, 36, 41, 145739))
+r = q.enqueue(add_slow, 11, 20)
+r.get_status()
+#[Out]# 'started'
+r.get_status()
+#[Out]# 'started'
+r.exists()
+r.is_finished()
+r.is_finished
+#[Out]# True
+r.is_cancelled
+r.is_canceled
+#[Out]# False
+r.is_stopped
+#[Out]# False
+r.retry()
+q
+#[Out]# Queue('default')
+results = []
+for i in range(100):
+    r = q.enqueue(add_slow, 10, i*20)
+    results.append(r)
+get_ipython().run_line_magic('pinfo', '%logstart')
+from simple_tasks_using_celery import *
+add
+#[Out]# <@task: simple_tasks_using_celery.add of simple_tasks_using_celery at 0x7fe2677cc2e0>
+add(10, 20)
+#[Out]# 30
+r = add.delay(10, 20)
+r
+#[Out]# <AsyncResult: f30e85ce-b676-4a20-a3a4-8048c16ec12b>
+r.get()
+#[Out]# 30
+r = add_slow.delay(10, 20)
+r.get()
+r.result
+#[Out]# 30
+r.result
+#[Out]# 30
+r = add_slow.delay(10, 20)
+r.result
+r.result
+r.result
+r.status
+#[Out]# 'SUCCESS'
+r = add_slow.delay(10, 20)
+r.status
+#[Out]# 'PENDING'
+r = add_slow.delay(10, 20)
+r.status
+#[Out]# 'PENDING'
+results = []
+for i in range(100):
+    r = add_slow.delay(10, 20*i)
+    results.append(r)
+    

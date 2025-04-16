@@ -1,0 +1,76 @@
+
+from redis import Redis
+get_ipython().run_line_magic('pinfo', 'Redis')
+r = Redis()
+r["aaa"] = 100
+r = Redis(host="192.168.1.130")
+r["aaa"] = 100
+
+get_ipython().run_line_magic('cat', 'rq_worker.py')
+from redis import Redis
+from rq import Queue
+from simple_task import add
+add(10, 20)
+q = Queue(connection=Redis(host="192.168.1.130"))
+q
+get_ipython().run_line_magic('pinfo', 'Redis')
+Redis("redis://192.168.1.130:6379/testq")
+r = Redis("redis://192.168.1.130:6379/testq")
+r
+q = Queue(connection=r)
+q
+q.enqueue(add, 10, 20)
+get_ipython().run_line_magic('pinfo', 'Queue')
+q = Queue(name="testq", connection=Redis(host="192.168.1.130"))
+q
+q.enqueue(add, 10, 20)
+q = Queue(connection=Redis(host="192.168.1.130"))
+q.enqueue(add, 10, 20)
+q.enqueue(add, 10, 20)
+q.enqueue(add, 10, 20)
+q.enqueue(add, 10, 20)
+q.enqueue(add, 10, 20)
+q.enqueue(add, 10, 20)
+q.enqueue(add, 10, 20)
+q.enqueue(add, 10, 20)
+q.enqueue(add, 10, 20)
+q.enqueue(add, 10, 20)
+q.enqueue(add, 10, 20)
+q.enqueue(add, 10, 20)
+j = q.enqueue(add, 10, 20)
+j
+j.result
+
+from simple_tasks import *
+from simple_task import *
+add(10, 20)
+add_slow(10, 20)
+from simple_task import *
+from redis import Redis
+r = Redis(host="192.168.1.130")
+r
+from rq import Queue
+q = Queue(connection=r)
+r = q.enqueue(add_slow, 10, 20)
+r
+r.result
+r.get_status()
+r = q.enqueue(add_slow, 10, 20)
+r.get_status()
+r.is_started()
+r.is_started
+r.is_finished
+r = q.enqueue(add_slow, 10, 20)
+r.is_finished
+r.result
+r.return_value
+r = q.enqueue(add_slow, 10, 20)
+r = q.enqueue(add_slow, 10, 20)
+r = q.enqueue(add_slow, 10, 20)
+get_ipython().run_line_magic('pinfo', 'Redis')
+q1 = Queue(connection=r, name="testq")
+q1.enqueue(add, 10, 20)
+r
+q1 = Queue(connection=Redis(host="192.168.1.130"))
+q1 = Queue(connection=Redis(host="192.168.1.130"), name="testq")
+q1.enqueue(add, 10, 20)
